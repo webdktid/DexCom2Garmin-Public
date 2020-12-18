@@ -1,0 +1,19 @@
+<strings>
+    <string id="AppName">Dex2Gar</string>
+    <string id="username">your Dexcom clarity username</string>
+    <string id="usernamePrompt">your Dexcom clarity username</string>
+    <string id="password">your Dexcom clarity password</string>
+    <string id="passwordPrompt">your Dexcom clarity password</string>
+    <string id="region">Region</string>
+    <string id="regionPrompt">Region</string>
+    <string id="unit">Unit</string>
+    <string id="unitPrompt">Unit</string>
+    <string id="eu">EU</string>
+    <string id="us">US</string>
+    <string id="mmol">mmol</string>
+    <string id="mgdL">mgdl</string>
+    <string id="Bloodsugar">Bloodsugar</string>
+    <string id="Units">Units</string>
+    <string id="label">Glucose</string>
+</strings>
+

@@ -1,0 +1,8 @@
+<fitContributions>
+    <fitField id="0" displayInChart="true" displayInActivityLaps="true" displayInActivitySummary="true" 
+    	sortOrder="0" precision="1"
+        chartTitle="@Strings.Bloodsugar" 
+        dataLabel="@Strings.Bloodsugar"
+        unitLabel="@Strings.Units" 
+        fillColor="#8A0303"/>
+</fitContributions>

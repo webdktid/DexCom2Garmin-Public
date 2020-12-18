@@ -1,0 +1,21 @@
+<settings>
+    <setting propertyKey="@Properties.username" title="@Strings.username" prompt="@Strings.usernamePrompt">
+        <settingConfig type="alphanumeric" required="false" /></setting>
+    
+    <setting propertyKey="@Properties.password" title="@Strings.password" prompt="@Strings.passwordPrompt">
+        <settingConfig type="alphanumeric" required="false" /></setting>
+ 
+	<setting propertyKey="@Properties.region" title='@Strings.region' prompt="@Strings.regionPrompt">
+	    	<settingConfig type="list" required="true">
+	    	    <listEntry value="0">@Strings.eu</listEntry>
+	            <listEntry value="1">@Strings.us</listEntry>
+	</settingConfig></setting>
+	
+	<setting propertyKey="@Properties.unit" title='@Strings.unit' prompt="@Strings.unitPrompt">
+	    	<settingConfig type="list" required="true">
+	    	    <listEntry value="0">@Strings.mmol</listEntry>
+	            <listEntry value="1">@Strings.mgdL</listEntry>
+	</settingConfig></setting>
+	
+
+</settings>
