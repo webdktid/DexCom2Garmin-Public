@@ -100,8 +100,12 @@ class Dex2GarView  extends WatchUi.DataField {
 		    if (dirSwitch.hasKey(mTrend)) 
 	        {
 				labelString = "BG: " + dirSwitch[mTrend][0];   
+		 		labelField.setText(labelString);
 	        }
-	 		labelField.setText(labelString);
+	        else
+	        {
+		 		labelField.setText("Unknown error " + mTrend);
+	        }
 		}
 		else
 		{
