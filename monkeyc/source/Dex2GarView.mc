@@ -27,15 +27,16 @@ class Dex2GarView  extends WatchUi.DataField {
 
 
  	const dirSwitch = { 
-	                      "1" => ["DoubleUp"], //DoubleUp
-	 					  "2" => ["SingleUp"], //SingleUp
-	                      "3" => ["FortyFiveUp"], //FortyFiveUp
+	                      "1" => ["Fast up"], //DoubleUp
+	 					  "2" => ["Up"], //SingleUp
+	                      "3" => ["Rising"], //FortyFiveUp
 	                      "4" => ["Flat"], //flat
-	                      "5" => ["FortyFiveDown"], //FortyFiveDown
-	                      "6" => ["SingleDown"], //SingleDown
-	                      "7" => ["DoubleDown"], //DoubleDown
+	                      "5" => ["Falling"], //FortyFiveDown
+	                      "6" => ["Down"], //SingleDown
+	                      "7" => ["Fast down"], //DoubleDown
 	                      "8" => ["Out of range"], //out of range
 	                      "9" => ["Out of range"] }; //RATE OUT OF RANGE
+
 
 	const ServiceErrors = {
 						  "200"=>"OK",
