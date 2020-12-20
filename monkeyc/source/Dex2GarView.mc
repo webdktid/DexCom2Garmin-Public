@@ -16,6 +16,15 @@ class Dex2GarView  extends WatchUi.DataField {
 	hidden var mTrend;
 	var errorMsg;
 
+	/*
+	mValue = 0 //Data
+		errorMsg = "Error in data";
+	mValue = -1 //settings
+		errorMsg = settings error
+	mValue = -2
+		errorMsg = ServiceErrors[mTrend];
+	*/
+
 
  	const dirSwitch = { 
 	                      "1" => ["DoubleUp"], //DoubleUp
@@ -29,32 +38,33 @@ class Dex2GarView  extends WatchUi.DataField {
 	                      "9" => ["Out of range"] }; //RATE OUT OF RANGE
 
 	const ServiceErrors = {
-						  0=>"An unknown error",
-						-1=>"A generic BLE error",
-						-2=>"timed out waiting for host.",
-						-3=>"timed out waiting for server.",
-						-4=>"Response contained no data.",
-						-5=>"The request was cancelled",
-						-101=>"Too many requests",
-						-102=>"Serialized input too large.",
-						-103=>"Send failed for an unknown reason.",
-						-104=>"No BLE connection available.",
-						-200=>"Request invalid http header fields.",
-						-201=>"Request invalid http body.",
-						-202=>"Request invalid http method.",
-						-300=>"Request timeout",
-						-400=>"Response body is invalid",
-						-401=>"Response invalid http header.",
-						-402=>"Serialized response too large.",
-						-403=>"Ran out of memory processing response.",
-						-1000=>"Filesystem too full to store data",
-						-1001=>"https is required for the request.",
-						-1002=>"Content type not supported or not expected.",
-						-1003=>"Http request was cancelled by the system.",
-						-1004=>"Connection lost before response obtained.",
-						-1005=>"unable to be read media.",
-						-1006=>"unable to proces image.",
-						-1007=>"HLS content could not be downloaded."
+						  "200"=>"OK",
+						  "0"=>"An unknown error",
+						"-1"=>"A generic BLE error",
+						"-2"=>"timed out waiting for host.",
+						"-3"=>"timed out waiting for server.",
+						"-4"=>"Response contained no data.",
+						"-5"=>"The request was cancelled",
+						"-101"=>"Too many requests",
+						"-102"=>"Serialized input too large.",
+						"-103"=>"Send failed for an unknown reason.",
+						"-104"=>"No BLE connection available.",
+						"-200"=>"Request invalid http header fields.",
+						"-201"=>"Request invalid http body.",
+						"-202"=>"Request invalid http method.",
+						"-300"=>"Request timeout",
+						"-400"=>"Response body is invalid",
+						"-401"=>"Response invalid http header.",
+						"-402"=>"Serialized response too large.",
+						"-403"=>"Ran out of memory processing response.",
+						"-1000"=>"Filesystem too full to store data",
+						"-1001"=>"https is required for the request.",
+						"-1002"=>"Content type not supported or not expected.",
+						"-1003"=>"Http request was cancelled by the system.",
+						"-1004"=>"Connection lost before response obtained.",
+						"-1005"=>"unable to be read media.",
+						"-1006"=>"unable to proces image.",
+						"-1007"=>"HLS content could not be downloaded."
 						};
 
     // Set the label of the data field here.
@@ -81,8 +91,13 @@ class Dex2GarView  extends WatchUi.DataField {
         View.findDrawableById("Background").setColor(getBackgroundColor());
 
         // Set the foreground color and value
+
+
         var valueField = View.findDrawableById("value");
         var labelField = View.findDrawableById("label");
+        
+        valueField.setFont(Graphics.FONT_LARGE);
+        		
         if (getBackgroundColor() == Graphics.COLOR_BLACK) {
             valueField.setColor(Graphics.COLOR_WHITE);
             labelField.setColor(Graphics.COLOR_WHITE);
@@ -100,14 +115,15 @@ class Dex2GarView  extends WatchUi.DataField {
 		else
 		{
         	
-	 		labelField.setText(errorMsg);
-
+	 		valueField.setText(errorMsg);
+			valueField.setFont(Graphics.FONT_TINY);
+        	
         	if(mValue==0)
-        		{valueField.setText("Data");}
+        		{labelField.setText("Data");}
         	if(mValue==-1)
-        		{valueField.setText("Settings");}
+        		{labelField.setText("Settings");}
         	if(mValue==-2)
-        		{valueField.setText("Service");}
+        		{labelField.setText("Service");}
 
 		}
 
@@ -167,6 +183,7 @@ class Dex2GarView  extends WatchUi.DataField {
 			return 0;    
 		 }    	 
          
+         
          var ix = data.find(",");
     	 if(ix==null)
 	 	 {
@@ -181,22 +198,14 @@ class Dex2GarView  extends WatchUi.DataField {
          if(mValue==-1)
          {
          	errorMsg = "config error";
-         	return 0;
+         	return mValue;
          }
+         
          
          if(mValue==-2)
          {
-         	if(dirSwitch.hasKey(mTrend))
-         	{
-         		errorMsg = ServiceErrors[mTrend];
-         	}
-         	else
-         	{
-         		errorMsg = "Unknown";
-         	} 
-         
-         	
-         	return 0;
+         	errorMsg = "Code:"+mTrend;
+         	return mValue;
          }
          
 		 errorMsg =null;
@@ -208,8 +217,6 @@ class Dex2GarView  extends WatchUi.DataField {
 	   
 	     }		
       
-        //Sys.println("mValue" + mValue);
-        //Sys.println("mTrend" + mTrend);
        	
        	bgFitContribField.setData(mValue);
         	                 
