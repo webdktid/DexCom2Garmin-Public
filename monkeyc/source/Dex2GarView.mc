@@ -92,25 +92,23 @@ class Dex2GarView  extends WatchUi.DataField {
             labelField.setColor(Graphics.COLOR_BLACK);
         }
         
-        if(errorMsg==null)
+        if(errorMsg==null || errorMsg=="")
 		{        
         	valueField.setText(mValue.format("%.1f"));
-			
-			var labelString = "";
-		    if (dirSwitch.hasKey(mTrend)) 
-	        {
-				labelString = "BG: " + dirSwitch[mTrend][0];   
-		 		labelField.setText(labelString);
-	        }
-	        else
-	        {
-		 		labelField.setText("Unknown error " + mTrend);
-	        }
+			labelField.setText( "BG: " + dirSwitch[mTrend][0]);   
 		}
 		else
 		{
+        	
 	 		labelField.setText(errorMsg);
-        	valueField.setText("");
+
+        	if(mValue==0)
+        		{valueField.setText("Data");}
+        	if(mValue==-1)
+        		{valueField.setText("Settings");}
+        	if(mValue==-2)
+        		{valueField.setText("Service");}
+
 		}
 
         View.onUpdate(dc);
@@ -148,8 +146,6 @@ class Dex2GarView  extends WatchUi.DataField {
             var valueView = View.findDrawableById("value");
             valueView.locY = valueView.locY + 10;
         }
-
-		 
 			
         View.findDrawableById("label").setText("Glucose");
         return true;
@@ -174,6 +170,7 @@ class Dex2GarView  extends WatchUi.DataField {
          var ix = data.find(",");
     	 if(ix==null)
 	 	 {
+         	mValue = 0;
          	errorMsg = "Error in data";
 			return 0;    
 		 }    	 
@@ -183,17 +180,26 @@ class Dex2GarView  extends WatchUi.DataField {
          
          if(mValue==-1)
          {
-         	errorMsg = "settings i wrong";
+         	errorMsg = "config error";
          	return 0;
          }
          
          if(mValue==-2)
          {
-         	errorMsg = ServiceErrors[mTrend];
+         	if(dirSwitch.hasKey(mTrend))
+         	{
+         		errorMsg = ServiceErrors[mTrend];
+         	}
+         	else
+         	{
+         		errorMsg = "Unknown";
+         	} 
+         
+         	
          	return 0;
          }
          
-		 errorMsg =errorMsg ;
+		 errorMsg =null;
          
          var unit = App.getApp().getProperty("unit");	
 	     if(unit==MMOL)
@@ -209,5 +215,4 @@ class Dex2GarView  extends WatchUi.DataField {
         	                 
 		return mValue; 	   
     }
-
 }
