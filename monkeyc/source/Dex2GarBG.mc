@@ -49,9 +49,10 @@ class Dex2GarBG extends Toybox.System.ServiceDelegate {
             }
             else
             {
-            	makeRequestToFunction();
             	Background.exit("-2,"+ responseCode);
+            	makeRequestToFunction();
             }
+
     }
 
    
