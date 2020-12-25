@@ -111,7 +111,15 @@ class Dex2GarView  extends WatchUi.DataField {
         if(errorMsg==null || errorMsg=="")
 		{        
         	valueField.setText(mValue.format("%.1f"));
-			labelField.setText( "BG: " + dirSwitch[mTrend][0]);   
+        	
+        	if(dirSwitch.hasKey(mTrend))
+         	{
+         		labelField.setText( "BG: " + dirSwitch[mTrend][0]);   
+         	}
+         	else
+         	{
+         		labelField.setText( "BG:"); 
+         	} 
 		}
 		else
 		{
@@ -184,7 +192,6 @@ class Dex2GarView  extends WatchUi.DataField {
 			return 0;    
 		 }    	 
          
-         
          var ix = data.find(",");
     	 if(ix==null)
 	 	 {
@@ -205,8 +212,15 @@ class Dex2GarView  extends WatchUi.DataField {
          
          if(mValue==-2)
          {
-         	errorMsg = "Code:"+mTrend;
-         	return mValue;
+         	if(dirSwitch.hasKey(mTrend))
+         	{
+         		errorMsg = ServiceErrors[mTrend];
+         	}
+         	else
+         	{
+         		errorMsg = "Code:"+mTrend.toString();
+         	} 
+         	return 0;
          }
          
 		 errorMsg =null;
@@ -215,7 +229,6 @@ class Dex2GarView  extends WatchUi.DataField {
 	     if(unit==MMOL)
 	     {
 	     	mValue = mValue / 18;
-	   
 	     }		
       
        	
